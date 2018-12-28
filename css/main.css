@@ -1143,7 +1143,7 @@ pre .javascript .function {
   bottom: 30px;
 }
 .header {
-  background: url("https://avatars2.githubusercontent.com/u/19896774?s=400&u=7b0cc72972d4cac90989bc2498b541c34bdab717&v=4");
+  background: url("../image/anf.jpg");
 }
 .header-inner {
   position: relative;
@@ -1896,7 +1896,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a68590;
+  background: #ff7753;
 }
 .links-of-blogroll {
   font-size: 13px;
