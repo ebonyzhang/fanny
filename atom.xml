@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ebonyzhang.fun/"/>
-  <updated>2019-01-03T09:29:03.492Z</updated>
+  <updated>2019-01-05T05:57:11.458Z</updated>
   <id>https://ebonyzhang.fun/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>接口问题以及解决方案汇总</title>
+    <link href="https://ebonyzhang.fun/2019/01/05/%E6%8E%A5%E5%8F%A3%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%B1%87%E6%80%BB/"/>
+    <id>https://ebonyzhang.fun/2019/01/05/接口问题以及解决方案汇总/</id>
+    <published>2019-01-05T05:56:16.827Z</published>
+    <updated>2019-01-05T05:57:11.458Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="接口问题以及解决方案汇总"><a href="#接口问题以及解决方案汇总" class="headerlink" title="接口问题以及解决方案汇总"></a>接口问题以及解决方案汇总</h2><h3 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h3><blockquote><p>省内接口转为全国统一接口，作为接口中转，主要是承上启下的作用。<br>保持前端请求以及参数不变的情况下，业务逻辑集中处理；<br>提供给第三方或者四方?!调用；<br>当接口变更时只更改当前接口项目即可。</p></blockquote><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p><code>java.net.URISyntaxException //Http Get请求报出此次错误。</code></p><p><strong>问题原因</strong>：</p><p><em>第三方接口需要将参数部分进行编码后提交。 原接口进行了编码传到中转接口这里仍然需要获取并重新编码传给第三方。</em></p><p><strong>解决办法</strong>：</p><p> 重新进行编码<br><code>URLEncoder.encode(param.toJSONString(),&quot;utf-8&quot;)</code></p><h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><pre><code>关于接口请求参数JSON格式的重新封装问题。</code></pre><p><strong>问题原因</strong>：</p><p><em>请求参数param是json格式的，接收过来的参数不能直接toJSONString，编码后传给第三方</em></p><p><strong>解决办法</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (map.containsKey(&quot;param&quot;)) &#123;</span><br><span class="line">JSONObject param = JSONObject.parseObject((String)map.get(&quot;param&quot;));</span><br><span class="line">url = url + &quot;&amp;param=&quot; + URLEncoder.encode(param.toJSONString(),&quot;utf-8&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><blockquote><p>针对接口调用做简单的记录，方便今后查看。<br>其实最好的框架是适合项目本身的，与高级或所谓低端无关，越是简单的反而更能解决问题，提升效率。</p></blockquote><blockquote><blockquote><p>是非入耳君须忍，半作痴呆半作聋。<br>今日听得别人八卦闲谈，笑而不语，仅此而已。</p></blockquote></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+      <category term="接口" scheme="https://ebonyzhang.fun/categories/%E6%8E%A5%E5%8F%A3/"/>
+    
+    
+      <category term="接口" scheme="https://ebonyzhang.fun/tags/%E6%8E%A5%E5%8F%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo主题与配置优化</title>
