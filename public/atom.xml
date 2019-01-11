@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ebonyzhang.fun/"/>
-  <updated>2019-01-09T09:23:43.492Z</updated>
+  <updated>2019-01-11T03:17:34.995Z</updated>
   <id>https://ebonyzhang.fun/</id>
   
   <author>
@@ -17,13 +17,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="https://ebonyzhang.fun/2019/01/09/test/"/>
-    <id>https://ebonyzhang.fun/2019/01/09/test/</id>
+    <title>Git</title>
+    <link href="https://ebonyzhang.fun/2019/01/09/Git/"/>
+    <id>https://ebonyzhang.fun/2019/01/09/Git/</id>
     <published>2019-01-09T09:22:59.793Z</published>
-    <updated>2019-01-09T09:23:43.492Z</updated>
+    <updated>2019-01-11T03:17:34.995Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><blockquote><p>进学致和，行方思远。——字严 </p></blockquote>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></p><p>将缓存区内容添加到本地仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &apos;注释&apos;</span><br></pre></td></tr></table></figure></p><p>推送到远程服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure></p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>添加到暂存区时，出现很多untrack<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -f</span><br></pre></td></tr></table></figure></p><p>之后，重新进行了添加，有个问题是将一些不需要的模块也上传了上去，于是做了清理以及重新添加提交等操作。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add *</span><br></pre></td></tr></table></figure><p>查看当前仓库中文件的状态。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure><p>如果没有问题，进行提交到本地仓库，最后推送到远程服务器。</p><p>查看当前分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure></p><p>更新代码到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure></p><p>此次将博客维护在了github上方便多台电脑操作，node_modules模块实在没必要上传维护，创建.gitignore文件,将不需要的文件夹配置在里面，<br>被ignore的文件肯定不会被标上untracked，上面的问题就是显示红字untracked。<br>在其他电脑上使用npm重新安装就可以，每次在更新博客时，要重新pull。</p><p>.gitignore文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br></pre></td></tr></table></figure></p><blockquote><p>所有事情到最后都会是好事，如果还不是，那她还没到最后——约翰*列侬 </p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -34,10 +34,10 @@
     
     </summary>
     
-      <category term="hexo" scheme="https://ebonyzhang.fun/categories/hexo/"/>
+      <category term="Git" scheme="https://ebonyzhang.fun/categories/Git/"/>
     
     
-      <category term="hexo" scheme="https://ebonyzhang.fun/tags/hexo/"/>
+      <category term="Git" scheme="https://ebonyzhang.fun/tags/Git/"/>
     
   </entry>
   
@@ -93,8 +93,8 @@
   
   <entry>
     <title>React组件通信方式总结</title>
-    <link href="https://ebonyzhang.fun/2019/01/09/react%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/"/>
-    <id>https://ebonyzhang.fun/2019/01/09/react组件通信方式汇总/</id>
+    <link href="https://ebonyzhang.fun/2019/01/09/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/"/>
+    <id>https://ebonyzhang.fun/2019/01/09/React组件通信方式汇总/</id>
     <published>2019-01-09T08:50:58.059Z</published>
     <updated>2019-01-09T08:18:15.878Z</updated>
     

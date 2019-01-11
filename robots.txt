@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https://ebonyzhang.fun/sitemap.xml
+Sitemap: https://ebonyzhang.fun/baidusitemap.xml
