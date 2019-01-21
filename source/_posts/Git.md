@@ -2,6 +2,7 @@
 title: Git
 tag: Git
 category: Git
+date: 2019-01-11
 ---
 
 ## Git
@@ -60,6 +61,6 @@ public/
 .deploy*/
 ```
 
-
+***	
 	
 >所有事情到最后都会是好事，如果还不是，那她还没到最后——约翰*列侬 

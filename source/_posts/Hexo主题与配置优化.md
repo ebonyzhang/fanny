@@ -2,6 +2,7 @@
 title: Hexo主题与配置优化
 tag: hexo
 category: hexo
+date: 2019-01-03
 ---
 
 ## next主题配置

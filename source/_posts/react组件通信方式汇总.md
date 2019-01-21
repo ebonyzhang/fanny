@@ -2,6 +2,7 @@
 title: React组件通信方式总结
 tag: React
 category: React
+date: 2019-01-09
 ---
 
 ## React组件通信方式
