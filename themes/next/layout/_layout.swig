@@ -29,6 +29,11 @@
   {% if theme.sidebar.position %}
     {% set container_class = container_class + 'sidebar-position-' + theme.sidebar.position %}
   {% endif %}
+  
+	<link rel="stylesheet" href="/dist/APlayer.min.css">
+	<div id="aplayer"></div>
+	<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+	<script type="text/javascript" src="/dist/music.js"></script>
 
   <div class="{{ container_class }} {% block page_class %}{% endblock %}">
     <div class="headband"></div>
@@ -80,6 +85,12 @@
         </span>
       </div>
     {% endif %}
+	
+	{% if theme.fireworks %}
+	   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+	   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+	   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+	{% endif %}
 
     {% if theme.baidushare and theme.baidushare.type === "slide" %}
       <div>
@@ -122,7 +133,7 @@
   {% if theme.canvas_nest %}
 	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   {% endif %}
-  <script type="text/javascript" src="/js/src/clklove.js"></script>
+  
   <script type="text/javascript" count="99" zindex="-2" opacity="1" color="255 0 0" src="/js/src/particle.js"></script>
 </body>
 </html>
