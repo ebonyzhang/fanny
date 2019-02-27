@@ -130,10 +130,7 @@
   {% include '_third-party/bookmark.swig' %}
   {% include '_third-party/copy-code.swig' %}
   {% include '_third-party/pdf.swig' %}
-  {% if theme.canvas_nest %}
-	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  {% endif %}
-  
+    
   <script type="text/javascript" count="99" zindex="-2" opacity="1" color="255 0 0" src="/js/src/particle.js"></script>
 </body>
 </html>
