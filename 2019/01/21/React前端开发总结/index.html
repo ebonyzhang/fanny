@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":15,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第一次使用react，还是习惯性的去找了合适的移动开发框架，直接在此基础上迭代开发。优点是能快速及时上手一个项目，边开发应用边学习，能做出一个可以用，可以看的东西。缺点是不能系统的学习，她的特性不能系统全面地掌握以及与之相关的技术底层能用但是原理模糊。整个项目虽然功能实现，但是是在一知半解状态做出来，边开发边解决问题，边重构迭代，react的优势并没有完全发挥出来。希望系统学习之后能进行一次整">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React前端开发总结">
+<meta property="og:url" content="https://ebonyzhang.fun/2019/01/21/React前端开发总结/index.html">
+<meta property="og:site_name" content="ebonyzhang&#39;s blog">
+<meta property="og:description" content="第一次使用react，还是习惯性的去找了合适的移动开发框架，直接在此基础上迭代开发。优点是能快速及时上手一个项目，边开发应用边学习，能做出一个可以用，可以看的东西。缺点是不能系统的学习，她的特性不能系统全面地掌握以及与之相关的技术底层能用但是原理模糊。整个项目虽然功能实现，但是是在一知半解状态做出来，边开发边解决问题，边重构迭代，react的优势并没有完全发挥出来。希望系统学习之后能进行一次整">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190116135946181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpbmdmdXpoaWppYW54aWE=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190122102047726.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpbmdmdXpoaWppYW54aWE=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-01-22T03:28:17.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React前端开发总结">
+<meta name="twitter:description" content="第一次使用react，还是习惯性的去找了合适的移动开发框架，直接在此基础上迭代开发。优点是能快速及时上手一个项目，边开发应用边学习，能做出一个可以用，可以看的东西。缺点是不能系统的学习，她的特性不能系统全面地掌握以及与之相关的技术底层能用但是原理模糊。整个项目虽然功能实现，但是是在一知半解状态做出来，边开发边解决问题，边重构迭代，react的优势并没有完全发挥出来。希望系统学习之后能进行一次整">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190116135946181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpbmdmdXpoaWppYW54aWE=,size_16,color_FFFFFF,t_70">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ebonyzhang's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ebonyzhang.fun/2019/01/21/React前端开发总结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>React前端开发总结 | ebonyzhang's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+  
+	<link rel="stylesheet" href="/dist/APlayer.min.css">
+	<div id="aplayer"></div>
+	<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+	<script type="text/javascript" src="/dist/music.js"></script>
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ebonyzhang's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">天道酬勤</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ebonyzhang.fun/2019/01/21/React前端开发总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ebonyzhang">
+      <meta itemprop="description" content="Life is a journey, the most brilliant thing is the process!">
+      <meta itemprop="image" content="/images/anf.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ebonyzhang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React前端开发总结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-21T00:00:00+08:00">2019-01-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-22 11:28:17" itemprop="dateModified" datetime="2019-01-22T11:28:17+08:00">2019-01-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			
+		
+		  <span class="post-meta-divider">|</span>
+		  <span id="busuanzi_value_page_pv"></span>次阅读
+		
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">41k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">37 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>第一次使用react，还是习惯性的去找了合适的移动开发框架，直接在此基础上迭代开发。<br>优点是能快速及时上手一个项目，边开发应用边学习，能做出一个可以用，可以看的东西。<br>缺点是不能系统的学习，她的特性不能系统全面地掌握以及与之相关的技术底层能用但是原理模糊。<br>整个项目虽然功能实现，但是是在一知半解状态做出来，边开发边解决问题，边重构迭代，react的优势并没有完全发挥出来。<br>希望系统学习之后能进行一次整体重构。</p>
+</blockquote>
+<h2 id="开发工具选择"><a href="#开发工具选择" class="headerlink" title="开发工具选择"></a>开发工具选择</h2><h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><h4 id="Sublime-Text-3"><a href="#Sublime-Text-3" class="headerlink" title="Sublime Text 3"></a>Sublime Text 3</h4><pre><code>使用这个就是因为以前用过，上手快，而且她快速，稳定，但是需要购买证书。
+</code></pre><h4 id="Vscode"><a href="#Vscode" class="headerlink" title="Vscode"></a>Vscode</h4><pre><code>速度较快，对超大文件读写速度飞快。
+</code></pre><h4 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h4><pre><code>速度一般，更新快，占用资源较大。
+</code></pre><h3 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h3><ol>
+<li>在 Chrome 上可以安装 React 开发者工具插件，这样就能在浏览器的开发控制台里看到 React 渲染出来的组件树，调试查看挺方便。</li>
+<li>微信web开发者工具。鉴于开发微信公众号应用，开发使用微信web开发者工具，可以提供公众号网页和小程序的开发，微信API里有提供下载链接。<br><a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1455784140" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1455784140</a><h2 id="React全家桶"><a href="#React全家桶" class="headerlink" title="React全家桶"></a>React全家桶</h2><blockquote>
+<p>react + redux + react-router + less/sass + ES6 + webpack<br>react全家桶，react使用的标配，一个个做简单的说明。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="构建开发环境demo"><a href="#构建开发环境demo" class="headerlink" title="构建开发环境demo"></a>构建开发环境demo</h3><p>使用create-react-app构建React开发环境，node以及npm已配置。<br>npm慢可以使用淘宝定制的cnpm，设置如下：</p>
+<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm config set registry https://registry.npm.taobao.org
+</code></pre><p><strong>create-react-app demo安装</strong></p>
+<pre><code>create-react-app my-app
+cnpm install -g create-react-app
+cd my-app/
+npm start
+</code></pre><p>启动之后，<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a><br>接下来可以在此基础上，学习或者实验react相关…</p>
+<h3 id="react"><a href="#react" class="headerlink" title="react"></a>react</h3><pre><code>采用声明式，高效而且灵活的用来构建用户界面的框架。
+官方文档 https://react.docschina.org 
+</code></pre><h4 id="虚拟dom"><a href="#虚拟dom" class="headerlink" title="虚拟dom"></a>虚拟dom</h4><pre><code>react-dom提供操作DOM的扩展库。 
+</code></pre><h4 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h4><pre><code>通过babel解析JSX语法代码转为纯JS语法代码的库。
+</code></pre><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p>   面向组件编程的(组件化编码开发)，最后得到标签代码，同时组件之间可以进行通信，数据传递也非常灵活。<br>关于组件通信方式，下面单独做了实验与总结。</p>
+<p> <strong>组件通讯方式</strong></p>
+<p>  <a href="https://blog.csdn.net/xingfuzhijianxia/article/details/86151243" target="_blank" rel="noopener">组件通信方式汇总</a></p>
+<p><strong>其他</strong><br>组件上加上prop-types进行验证</p>
+<blockquote>
+<p>optionalArray: PropTypes.array,<br>optionalBool: PropTypes.bool,<br>optionalFunc: PropTypes.func,<br>optionalNumber: PropTypes.number,<br>optionalObject: PropTypes.object,<br>optionalString: PropTypes.string,<br>optionalSymbol: PropTypes.symbol</p>
+</blockquote>
+<h3 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h3><p>虽然使用的脚手架中整合了redux，但是在使用中，为了赶进度没有使用，重构的时候也把这部分也加上了。</p>
+<blockquote>
+<p>只有遇到 React 实在解决不了的问题，你才需要 Redux 。</p>
+</blockquote>
+<p>redux简单做了个总结。<br><a href="https://ebonyzhang.fun/2019/01/21/redux/">Redux总结</a></p>
+<h3 id="react-router"><a href="#react-router" class="headerlink" title="react-router"></a>react-router</h3><blockquote>
+<p>用于构建路由，主要有Router，IndexRoute，Route，Link，IndexLink这几个组件，以及hashHistory，browserHistory。</p>
+</blockquote>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><pre><code>npm install --save react-router
+</code></pre><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>项目部署的时候，原配置createHashHistory出现一片白问题，后来更换了createBrowserHistory，重新部署后可访问。<br>区别<br>browserHistory 其实使用的是 HTML5 的 History API，浏览器提供相应的接口来修改浏览器的历史记录；<br>hashHistory 是通过改变地址后面的 hash来改变浏览器的历史记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import createHistory from &apos;history/createBrowserHistory&apos;</span><br></pre></td></tr></table></figure>
+<p>从 React Router 中导入 <router> <route></route></router></p>
+<pre><code>import { BrowserRouter as Router, Route } from &apos;react-router-dom&apos;;    
+</code></pre><p><strong>react-router嵌套路由</strong></p>
+<blockquote>
+<p>Router包裹Route，<br>当url变化的时候，Router将会匹配到指定的路由，然后渲染路由绑定的组件。<br>Route用来显式地把路由映射到应用的组件结构上。 用path指定url，用component指定路由命中url后需要渲染的那个组件。</p>
+</blockquote>
+<p>如下：</p>
+<pre><code>&lt;Router basename={AppCfg.app.BaseName}&gt;
+ &lt;App&gt;
+   &lt;Route exact path=&quot;/&quot; component={CreateComponent(Default)} /&gt;         
+    &lt;Route path=&quot;/home&quot; component={CreateComponent(Home)} /&gt;
+    &lt;Route path=&quot;/userinfo&quot; component={CreateComponent(UserInfo)} /&gt;
+  &lt;/App&gt;
+&lt;/Router&gt;
+</code></pre><blockquote>
+<p>通过Provider将redux绑定到react，同时用Provider包裹路由，路由控制器就可以访问store。</p>
+</blockquote>
+<pre><code>&lt;AppContainer warnings={false}&gt;
+  &lt;Provider store={ApiClientStore} key=&quot;provider&quot;&gt;
+    &lt;Router history={history}&gt;
+      {RootElement}
+    &lt;/Router&gt;
+  &lt;/Provider&gt;
+&lt;/AppContainer&gt;
+</code></pre><p><strong>Switch</strong> </p>
+<blockquote>
+<p>Switch的特点是从上往下读,只要有一个匹配成功,就不会往下读(Switch是由包容性变成排他性的一个重要组件)    </p>
+</blockquote>
+<p>在具体页面跳转中使用switch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Switch &#125; from &apos;react-router-dom&apos;;</span><br><span class="line"></span><br><span class="line">const &#123; location &#125; = route || &#123;&#125;;</span><br><span class="line">const &#123; key &#125; = location || &#123;&#125;;</span><br><span class="line">&lt;Switch key=&#123;key&#125; location=&#123;location&#125;&gt;</span><br><span class="line">  &#123;this.props.children&#125;</span><br><span class="line">&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
+<p>其他</p>
+<blockquote>
+<p>React Router 提供一个 routerWillLeave生命周期钩子，这使得 React 组件可以拦截正在发生的跳转，或在离开 route 前提示用户。routerWillLeave 返回值有以下两种：<br>return false 取消此次跳转<br>return 返回提示信息，在离开 route 前提示用户进行确认。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Lifecycle &#125; from &apos;react-router&apos;</span><br><span class="line"></span><br><span class="line">const Home = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">  // 假设 Home 是一个 route 组件，它可能会使用</span><br><span class="line">  // Lifecycle mixin 去获得一个 routerWillLeave 方法。</span><br><span class="line">  mixins: [ Lifecycle ],</span><br><span class="line"></span><br><span class="line">  routerWillLeave(nextLocation) &#123;</span><br><span class="line">    if (!this.state.isSaved)</span><br><span class="line">      return &apos;Your work is not saved! Are you sure you want to leave?&apos;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  // ...</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>Links</strong><br>Link在内部做了一个操作,把标签变成了a标签。</p>
+<pre><code>&lt;Link to=&quot;user&quot; params={{userId: user.id}}&gt;touser&lt;/Link&gt;
+</code></pre><p><strong>Redirect组件(重定向)</strong><br>from(使用绝对路径)<br>exact(精准匹配)<br>to(跳转路径)</p>
+<h3 id="less-sass"><a href="#less-sass" class="headerlink" title="less/sass"></a>less/sass</h3><p>本次开发中使用sass，由于使用了react-weui样式使用较少了。<br>SASS是一种CSS的开发工具，使CSS的开发，变得简单和可维护。<br>可以查看阮一峰老师关于此教程。<br><a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/06/sass.html</a></p>
+<h3 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h3><p><strong>声明方式</strong><br>var 、function 、let 、const 、import、 class。</p>
+<blockquote>
+<p>ES6中明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域，凡是在声明之前就使用这些变量就会报错。</p>
+</blockquote>
+<p><strong>箭头函数</strong><br>相当于匿名函数，使用“箭头”（=&gt;）定义函数。<br><strong>无参箭头函数</strong></p>
+<pre><code>setInterval(() =&gt; this.nextSlide(), 2000);
+</code></pre><p><strong>一个参数箭头函数</strong></p>
+<pre><code>x =&gt; {console.log(x*x)}
+</code></pre><p><strong>多个参数箭头函数</strong><br>   参数需要用括号()括起来</p>
+<pre><code>&apos;use strict&apos;
+ var arr = [10, 20, 1, 2];
+ arr.sort((x, y) =&gt; {
+   if(x-y&gt;0){
+       return 1;
+   }else{
+       return -1;
+   }
+});
+console.log(arr); // [1, 2, 10, 20]
+</code></pre><p><strong>可变参数</strong><br>…rest<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(x, y, ...rest) =&gt; &#123;</span><br><span class="line">	var i, sum = x + y;</span><br><span class="line">	 for (i=0; i&lt;rest.length; i++) &#123;</span><br><span class="line">	     sum += rest[i];</span><br><span class="line">	 &#125;</span><br><span class="line">	 return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>其他</strong></p>
+<ol>
+<li>this,箭头函数内部的this是词法作用域，由上下文确定。</li>
+<li>函数体返回表达式的需要使用括号，例 x =&gt; ({ foo: x })</li>
+</ol>
+<blockquote>
+<p>Es6箭头函数说明挺全也很简明<br><a href="https://www.cnblogs.com/snandy/p/4403111.html" target="_blank" rel="noopener">https://www.cnblogs.com/snandy/p/4403111.html</a></p>
+</blockquote>
+<h3 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h3><blockquote>
+<p>ES6 ESLint 是一个语法规则和代码风格的检查工具，可以用来保证写出语法正确、风格统一的代码。</p>
+</blockquote>
+<p>重构时候原来的代码都有问题，前后空格、无效的代码以及分号等等各种问题。<br>一开始使用eslint确实会影响进度，但是对于规范代码以及语法有很好的引导，虽然麻烦点，最后的使用效果不错。<br>类似如下错误，根据提示修改即可。<br>(1) expected parenteses around arrow function argument having a body with curly braces arrow-parens<br>箭头函数参数周围的预期括号具有带大括号的主体<br>(2) Empty components are self-closing<br>组件内部空时，不需要自己关闭，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;a href=&#123;link&#125;&gt;</span><br><span class="line"> &lt;div  className=&quot;slider__slide&quot; //此处</span><br><span class="line">    data-active=&#123;active&#125;</span><br><span class="line">    style=&#123;slideStyle&#125;</span><br><span class="line">    onTouchStart=&#123;(ev) =&gt; &#123; this.clickCarousel(carouselId, ev); &#125;&#125;</span><br><span class="line">    onTouchEnd=&#123;(ev) =&gt; &#123; this.touchEnd(ev); &#125;</span><br><span class="line">    &#125;&gt;&lt;/div&gt; //此处</span><br><span class="line">&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&#123;link&#125;&gt;</span><br><span class="line"> &lt;div </span><br><span class="line">    className=&quot;slider__slide&quot; //换行</span><br><span class="line">    data-active=&#123;active&#125;</span><br><span class="line">    style=&#123;slideStyle&#125;</span><br><span class="line">    onTouchStart=&#123;(ev) =&gt; &#123; this.clickCarousel(carouselId, ev); &#125;&#125;</span><br><span class="line">    onTouchEnd=&#123;(ev) =&gt; &#123; this.touchEnd(ev); &#125;</span><br><span class="line">    &#125;/&gt; //空的div去除</span><br><span class="line">&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><blockquote>
+<p>WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用</p>
+</blockquote>
+<p>webpack与Gulp的区别</p>
+<blockquote>
+<p>Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。<br>Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。<br>Webpack的处理速度更快更直接，能打包更多不同类型的文件</p>
+</blockquote>
+<p>这个不详细写了，要再实践总结下，但是这篇文章写得很好，值得学习。<br><a href="https://segmentfault.com/a/1190000006178770?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000006178770?utm_source=tag-newest</a></p>
+<h2 id="react-UI库"><a href="#react-UI库" class="headerlink" title="react UI库"></a>react UI库</h2><p>UI库的选择上，找了好几个，鉴于微信公众号网页的兼容性，最后选择了react-weui。</p>
+<h3 id="Material-UI"><a href="#Material-UI" class="headerlink" title="Material-UI"></a>Material-UI</h3><blockquote>
+<p>Material-UI是一个实现了Google’s Material Design设计规范的react组件库。</p>
+</blockquote>
+<h3 id="Ant-design"><a href="#Ant-design" class="headerlink" title="Ant-design"></a>Ant-design</h3><blockquote>
+<p>蚂蚁金服开发的一个基于react的UI组件库</p>
+</blockquote>
+<h3 id="react-weui"><a href="#react-weui" class="headerlink" title="react-weui"></a>react-weui</h3><p><strong>API</strong><br><a href="https://weui.github.io/react-weui/docs" target="_blank" rel="noopener">https://weui.github.io/react-weui/docs</a></p>
+<p><strong>1.安装</strong></p>
+<pre><code>npm install weui@1.1.0 react-weui --save
+</code></pre><p><strong>2.使用</strong><br>在App.js中引入模块。</p>
+<pre><code>import &apos;weui&apos;;
+import &apos;react-weui/build/packages/react-weui.css&apos;;
+</code></pre><p>实际使用中，import 相应的组件即可，以首页的tab切换页为例，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Tab, TabBody, TabBar, TabBarItem, Article &#125; from &apos;react-weui&apos;;</span><br></pre></td></tr></table></figure>
+<p>详细页面如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;Tab&gt;</span><br><span class="line"> &lt;TabBody&gt;</span><br><span class="line">    &lt;Article style=&#123;&#123; display: this.state.tab == 0 ? null : &apos;none&apos; &#125;&#125;&gt;</span><br><span class="line">      &lt;h1&gt;Page 1&lt;/h1&gt;</span><br><span class="line">      &lt;section&gt;</span><br><span class="line">        &lt;h2 className=&quot;title&quot;&gt;Heading&lt;/h2&gt;</span><br><span class="line">        &lt;section&gt;</span><br><span class="line">          &lt;h3&gt;1.1 Title&lt;/h3&gt;</span><br><span class="line">          &lt;p&gt;1111&lt;/p&gt;</span><br><span class="line">        &lt;/section&gt;</span><br><span class="line">      &lt;/section&gt;</span><br><span class="line">    &lt;/Article&gt;</span><br><span class="line">    &lt;Article style=&#123;&#123; display: this.state.tab == 1 ? null : &apos;none&apos; &#125;&#125;&gt;</span><br><span class="line">      &lt;h1&gt;Page 2&lt;/h1&gt;</span><br><span class="line">      &lt;section&gt;</span><br><span class="line">        &lt;h2 className=&quot;title&quot;&gt;Heading&lt;/h2&gt;</span><br><span class="line">        &lt;section&gt;</span><br><span class="line">          &lt;h3&gt;2.1 Title&lt;/h3&gt;</span><br><span class="line">          &lt;p&gt;222&lt;/p&gt;</span><br><span class="line">        &lt;/section&gt;</span><br><span class="line">      &lt;/section&gt;</span><br><span class="line">    &lt;/Article&gt;</span><br><span class="line">  &lt;/TabBody&gt;</span><br><span class="line">  &lt;TabBar&gt;</span><br><span class="line">    &lt;TabBarItem</span><br><span class="line">      active=&#123;this.state.tab == 0&#125;</span><br><span class="line">      icon=&#123;&lt;img src=&#123;this.state.urlmain&#125; alt=&quot;购票主页&quot; /&gt;&#125;</span><br><span class="line">      onClick=&#123;(e) =&gt; this.handleTab(e, 0)&#125;</span><br><span class="line">      label=&quot;主页&quot;</span><br><span class="line">    /&gt;</span><br><span class="line">    &lt;TabBarItem</span><br><span class="line">      active=&#123;this.state.tab == 1&#125;</span><br><span class="line">      icon=&#123;&lt;img src=&#123;this.state.urlmine&#125; alt=&quot;个人中心&quot; /&gt;&#125;</span><br><span class="line">      onClick=&#123;(e) =&gt; this.handleTab(e, 1)&#125;</span><br><span class="line">      label=&quot;个人中心&quot;</span><br><span class="line">    /&gt;</span><br><span class="line">  &lt;/TabBar&gt;</span><br><span class="line">&lt;/Tab&gt;</span><br></pre></td></tr></table></figure>
+<p>效果如下图</p>
+<p><img src="https://img-blog.csdnimg.cn/20190116135946181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpbmdmdXpoaWppYW54aWE=,size_16,color_FFFFFF,t_70" alt="初始化展示"></p>
+<p>react-weui提供了一系列的组件，可以方便引入和使用，基本可以满足项目中的应用。</p>
+<h2 id="支付宝支付"><a href="#支付宝支付" class="headerlink" title="支付宝支付"></a>支付宝支付</h2><p>其实一开始对微信里使用支付宝支付这个感觉有点喧宾夺主了。但是微信里还真的可以这么干，也挺有意思的。总之，用户需求至上。<br>不过支付宝给出的解决方案里真正使用有点另起炉灶的意思。</p>
+<p><strong>1.需要引入相关的js文件作为支撑ap.js。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;var b=&#123;&#125;;var a=&#123;&#125;;a.PADCHAR=&quot;=&quot;;a.ALPHA=&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;a.makeDOMException=function()&#123;var f,d;try&#123;return new DOMException(DOMException.INVALID_CHARACTER_ERR)&#125;catch(d)&#123;var c=new Error(&quot;DOM Exception 5&quot;);c.code=c.number=5;c.name=c.description=&quot;INVALID_CHARACTER_ERR&quot;;c.toString=function()&#123;return&quot;Error: &quot;+c.name+&quot;: &quot;+c.message&#125;;return c&#125;&#125;;a.getbyte64=function(e,d)&#123;var c=a.ALPHA.indexOf(e.charAt(d));if(c===-1)&#123;throw a.makeDOMException()&#125;return c&#125;;a.decode=function(f)&#123;f=&quot;&quot;+f;var j=a.getbyte64;var h,e,g;var d=f.length;if(d===0)&#123;return f&#125;if(d%4!==0)&#123;throw a.makeDOMException()&#125;h=0;if(f.charAt(d-1)===a.PADCHAR)&#123;h=1;if(f.charAt(d-2)===a.PADCHAR)&#123;h=2&#125;d-=4&#125;var c=[];for(e=0;e&lt;d;e+=4)&#123;g=(j(f,e)&lt;&lt;18)|(j(f,e+1)&lt;&lt;12)|(j(f,e+2)&lt;&lt;6)|j(f,e+3);c.push(String.fromCharCode(g&gt;&gt;16,(g&gt;&gt;8)&amp;255,g&amp;255))&#125;switch(h)&#123;case 1:g=(j(f,e)&lt;&lt;18)|(j(f,e+1)&lt;&lt;12)|(j(f,e+2)&lt;&lt;6);c.push(String.fromCharCode(g&gt;&gt;16,(g&gt;&gt;8)&amp;255));break;case 2:g=(j(f,e)&lt;&lt;18)|(j(f,e+1)&lt;&lt;12);c.push(String.fromCharCode(g&gt;&gt;16));break&#125;return c.join(&quot;&quot;)&#125;;a.getbyte=function(e,d)&#123;var c=e.charCodeAt(d);if(c&gt;255)&#123;throw a.makeDOMException()&#125;return c&#125;;a.encode=function(f)&#123;if(arguments.length!==1)&#123;throw new SyntaxError(&quot;Not enough arguments&quot;)&#125;var g=a.PADCHAR;var h=a.ALPHA;var k=a.getbyte;var e,j;var c=[];f=&quot;&quot;+f;var d=f.length-f.length%3;if(f.length===0)&#123;return f&#125;for(e=0;e&lt;d;e+=3)&#123;j=(k(f,e)&lt;&lt;16)|(k(f,e+1)&lt;&lt;8)|k(f,e+2);c.push(h.charAt(j&gt;&gt;18));c.push(h.charAt((j&gt;&gt;12)&amp;63));c.push(h.charAt((j&gt;&gt;6)&amp;63));c.push(h.charAt(j&amp;63))&#125;switch(f.length-d)&#123;case 1:j=k(f,e)&lt;&lt;16;c.push(h.charAt(j&gt;&gt;18)+h.charAt((j&gt;&gt;12)&amp;63)+g+g);break;case 2:j=(k(f,e)&lt;&lt;16)|(k(f,e+1)&lt;&lt;8);c.push(h.charAt(j&gt;&gt;18)+h.charAt((j&gt;&gt;12)&amp;63)+h.charAt((j&gt;&gt;6)&amp;63)+g);break&#125;return c.join(&quot;&quot;)&#125;;b.pay=function(d)&#123;var c=encodeURIComponent(a.encode(d));location.href=&quot;pay.htm?goto=&quot;+c&#125;;b.decode=function(c)&#123;return a.decode(decodeURIComponent(c))&#125;;window._AP=b&#125;)();</span><br></pre></td></tr></table></figure>
+<p><strong>2.支付宝生成签名</strong></p>
+<p>请求生成支付宝签名返回参数作为支付宝支付的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let params = new FormData();</span><br><span class="line">params.append(&apos;loginId&apos;, user.id);  </span><br><span class="line">params.append(&apos;orderNo&apos;, orderNo);  </span><br><span class="line">ApiClientUtil.post(ApiInfo.Alipay, params).then((json) =&gt; &#123;  </span><br><span class="line">  if(json.success) &#123;</span><br><span class="line">    const gotoUrl=&apos;https://openapi.alipay.com/gateway.do?&apos;+ json.body;</span><br><span class="line">    window._AP.pay(gotoUrl);</span><br><span class="line">  &#125;else &#123;</span><br><span class="line">    Alert.error(&apos;支付宝支付遇到问题，请重新尝试&apos;, &#123;position: &apos;top&apos;,</span><br><span class="line">      offset: 40,onRouteClose: true, timeout: 2000&#125;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>3.跳转到pay.htm</strong><br>这个页面当用户选择支付宝账户点击确认支付时，页面跳转到此页面提示用户打开浏览器，进而完成支付的页面，在新的浏览器网页中完成支付宝支付。<br><strong><em>请在菜单中选择在浏览器中打开,以完成支付…</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;</span><br><span class="line">    &quot;&gt;</span><br><span class="line">    &lt;title&gt;支付提示&lt;/title&gt;</span><br><span class="line">    &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;/&gt;</span><br><span class="line">    &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;/&gt;</span><br><span class="line">    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;/&gt;</span><br><span class="line">    &lt;meta name=&quot;format-detection&quot; content=&quot;email=no&quot;/&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0&quot;/&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        *, :before, :after &#123;</span><br><span class="line">            -webkit-tap-highlight-color: rgba(0, 0, 0, 0)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, textarea, p, blockquote, th, td &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        table &#123;</span><br><span class="line">            border-collapse: collapse;</span><br><span class="line">            border-spacing: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fieldset, img &#123;</span><br><span class="line">            border: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        li &#123;</span><br><span class="line">            list-style: none</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        caption, th &#123;</span><br><span class="line">            text-align: left</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        q:before, q:after &#123;</span><br><span class="line">            content: &quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        input:password &#123;</span><br><span class="line">            ime-mode: disabled</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        :focus &#123;</span><br><span class="line">            outline: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        html, body &#123;</span><br><span class="line">            -webkit-touch-callout: none;</span><br><span class="line">            touch-callout: none;</span><br><span class="line">            -webkit-user-select: none;</span><br><span class="line">            user-select: none;</span><br><span class="line">            -webkit-tap-highlight-color: transparent;</span><br><span class="line">            tap-highlight-color: transparent;</span><br><span class="line">            height: 100%;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">            text-align: center;</span><br><span class="line">            font-size: 15px;</span><br><span class="line">            font-weight: 300;</span><br><span class="line">            font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        a &#123;</span><br><span class="line">            text-decoration: none</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        body &#123;</span><br><span class="line">            background: #F4F4F8</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .weixin-tip &#123;</span><br><span class="line">            display: none;</span><br><span class="line">            -webkit-box-sizing: border-box;</span><br><span class="line">            box-sizing: border-box;</span><br><span class="line">            position: absolute;</span><br><span class="line">            top: 15px;</span><br><span class="line">            right: 20px;</span><br><span class="line">            width: 265px;</span><br><span class="line">            padding: 55px 0 0;</span><br><span class="line">            text-align: left;</span><br><span class="line">            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAACICAMAAABQgAwUAAAAMFBMVEUAAADY2NjY2NjY2NjY2NjY2NjY2NjY2NjX19fY2NjY2NjY2NjY2NjY2NjY2NjY2Njr/TvvAAAAD3RSTlMAxy89c9CdTRyG7lvcD7FzqbJAAAACFklEQVR42uWYy4rkMBAErZdlPdzx/3+7LAw0tH0Y2orDsnnyKQlSVaWytoc6xrEpigFoinUAIBnWABAE5woW9o6GPbGwI1jYGSzsgoV9goU9wMLe0bA7FnYCC7uBhV2wsE+wsAdY2AENGyzsBBZ2Q8MuWNgH94pLbgELO6Bhg4VdwcJuaNgTCzuChZ3Bwg5o2GBhV7CwdzTsjoUdwcLOYGEXLOwTLOwBFvaOht2xsBNY2I1f6lhaenvhrfpkAblab+k9b/OD0iuX2F9/x8D+7ZL2pmpbuj+6o3Vg//oWmPU9p65VkXL6+oIJ8S738nwj62Pb1lvHACH+fBs7sG59U3yrVD3rce3GVcp8qGkPAGTprQUYy6xfaE8i82b6S7/pfZnzdYQIHeOXdfYKpHoFcmrvWlM8RW+CDO8JMWoNM/+FeyB4UfMpL48g5qG1Iqc29YI3mqq2knXvEJu2onJoQy9ok4mkQZf/GjqitUvQyqN6SU8NOvOhHq25xNCWj6LFQdLiyKuaZWpxBC2OrFVHxdryElbQsVtBx6KN0qAd4a71yo610uxa2b0s5xg052I5p26d4MCqusZFwzrAnqQhSogSMnkNcr+GUS3kEKWS62NJFlNCToWLZpWMe14RReGqdjz2PfNECbkGbrQ/Nj5q5y7j8/HRTW5UhvHfA7Mdzitji8rfWsgX3gVZ91eO22odKed6LLf9A/sRnc74RV7lAAAAAElFTkSuQmCC) no-repeat right top;</span><br><span class="line">            background-size: 45px 68px</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .weixin-tip-img &#123;</span><br><span class="line">            display: none;</span><br><span class="line">            padding: 110px 0 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .weixin-tip-img::after &#123;</span><br><span class="line">            display: block;</span><br><span class="line">            margin: 15px auto;</span><br><span class="line">            content: &apos; &apos;;</span><br><span class="line">            background-size: cover</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .weixin-tip-img.iphone::after &#123;</span><br><span class="line">            width: 150px;</span><br><span class="line">            height: 150px;</span><br><span class="line">            background-image: url(data:image/png;base64,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)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .weixin-tip-img.android::after &#123;</span><br><span class="line">            width: 173px;</span><br><span class="line">            height: 240px;</span><br><span class="line">            background-image: url(data:image/png;base64,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)</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;J-weixin-tip weixin-tip&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;weixin-tip-content&quot;&gt;</span><br><span class="line">        请在菜单中选择在浏览器中打开,&lt;br/&gt;</span><br><span class="line">        以完成支付</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;J-weixin-tip-img weixin-tip-img&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;br/&gt;</span><br><span class="line">    &lt;a href=&quot;/&quot; name=&quot;&quot; style=&quot;font-size: 16px;color: green;&quot;&gt;支付完成，点此返回主页&lt;/a&gt;  </span><br><span class="line">&lt;/div&gt;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;ap.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    if (location.hash.indexOf(&apos;error&apos;) != -1) &#123;</span><br><span class="line">        alert(&apos;参数错误，请检查&apos;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        var ua = navigator.userAgent.toLowerCase();</span><br><span class="line">        var tip = document.querySelector(&quot;.weixin-tip&quot;);</span><br><span class="line">        var tipImg = document.querySelector(&quot;.J-weixin-tip-img&quot;);</span><br><span class="line">        if (ua.indexOf(&apos;micromessenger&apos;) != -1) &#123;</span><br><span class="line">            tip.style.display = &apos;block&apos;;</span><br><span class="line">            tipImg.style.display = &apos;block&apos;;</span><br><span class="line">            if (ua.indexOf(&apos;iphone&apos;) != -1 || ua.indexOf(&apos;ipad&apos;) != -1 || ua.indexOf(&apos;ipod&apos;) != -1) &#123;</span><br><span class="line">                tipImg.className = &apos;J-weixin-tip-img weixin-tip-img iphone&apos;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                tipImg.className = &apos;J-weixin-tip-img weixin-tip-img android&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            var getQueryString = function (url, name) &#123;</span><br><span class="line">                var reg = new RegExp(&quot;(^|\\?|&amp;)&quot; + name + &quot;=([^&amp;]*)(\\s|&amp;|$)&quot;, &quot;i&quot;);</span><br><span class="line">                if (reg.test(url)) return RegExp.$2.replace(/\+/g, &quot; &quot;);</span><br><span class="line">            &#125;;</span><br><span class="line">            var param = getQueryString(location.href, &apos;goto&apos;) || &apos;&apos;;</span><br><span class="line">            location.href = param != &apos;&apos; ? _AP.decode(param) : &apos;pay.htm#error&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="微信支付"><a href="#微信支付" class="headerlink" title="微信支付"></a>微信支付</h2><p>参考这个实现<br><a href="https://blog.csdn.net/wyk304443164/article/details/72845409" target="_blank" rel="noopener">https://blog.csdn.net/wyk304443164/article/details/72845409</a></p>
+<p>首先，用户选择微信支付，传入订单号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">let _that = this;</span><br><span class="line">Pay.done(order.bookNum, _that, 1, is_true =&gt; &#123;</span><br><span class="line">  if (is_true) &#123;</span><br><span class="line">    Alert.success(&apos;支付成功&apos;, &#123;</span><br><span class="line">      position: &apos;top&apos;,</span><br><span class="line">      offset: 40,</span><br><span class="line">      onRouteClose: true, </span><br><span class="line">      timeout: 1500,</span><br><span class="line">      onClose: function () &#123;</span><br><span class="line">        Utility.toPage(&apos;order&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    Alert.error(&apos;微信支付失败,请重新尝试&apos;, &#123;position: &apos;top&apos;,</span><br><span class="line">      offset: 40,onRouteClose: true, timeout: 2000&#125;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>Pay组件支付实现</strong><br>支付过程中先由微信生成预支付信息，用户支付完成后执行成功提示等操作。同时，后台接口提供订单回调，修改订单状态业务等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">import &apos;react-jweixin&apos;;</span><br><span class="line"> </span><br><span class="line">let Pay = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 支付的回调</span><br><span class="line"> */</span><br><span class="line">let payCallback;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 开始支付--这个方法其实是从后台请求微信支付签名。成功继续，失败回调</span><br><span class="line"> * @param _order_id 传bookNum即可</span><br><span class="line"> * @param openid 微信公众号openid</span><br><span class="line"> * @param _thisObj 传this即可</span><br><span class="line"> * @param _payType 支付类型--暂时只有微信</span><br><span class="line"> * @param _callback 回调 true or false</span><br><span class="line"> */</span><br><span class="line">Pay.done = function (_order_id, _thisObj, _payType, _callback) &#123;</span><br><span class="line">    let params = new FormData(); </span><br><span class="line">    params.append(&apos;searchParam.bookNum&apos;, _order_id); </span><br><span class="line">    params.append(&apos;searchParam.useFlag&apos;, 0); //0新商户</span><br><span class="line">    let openid = sessionStorage.getItem(&apos;openid&apos;); </span><br><span class="line">    params.append(&apos;searchParam.openid&apos;, openid);  </span><br><span class="line">    if (typeof _callback === &quot;function&quot;) &#123;</span><br><span class="line">        payCallback = _callback;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ApiClientUtil.post(ApiInfo.PaySign, params).then((data) =&gt; &#123;</span><br><span class="line">        if(data.head.success) &#123;</span><br><span class="line">            this.doneResponse(data.body);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).catch(() =&gt; &#123;</span><br><span class="line">        payCallback(false);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Pay.doneResponse = function (result) &#123;</span><br><span class="line">    this.callPay(result);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Pay.callPay = function (code) &#123;</span><br><span class="line">    if (typeof WeixinJSBridge === &quot;undefined&quot;) &#123;</span><br><span class="line">        if (document.addEventListener) &#123;</span><br><span class="line">            document.addEventListener(&apos;WeixinJSBridgeReady&apos;, this.jsApiCall, false);</span><br><span class="line">        &#125; else if (document.attachEvent) &#123;</span><br><span class="line">            document.attachEvent(&apos;WeixinJSBridgeReady&apos;, this.jsApiCall);</span><br><span class="line">            document.attachEvent(&apos;onWeixinJSBridgeReady&apos;, this.jsApiCall);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.jsApiCall(code);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Pay.jsApiCall = function (code) &#123;</span><br><span class="line">    WeixinJSBridge.invoke(&apos;getBrandWCPayRequest&apos;, code, function (res) &#123;</span><br><span class="line">        if (!Utility.isNull(res) &amp;&amp; !Utility.isNull(res.err_msg) &amp;&amp; res.err_msg.indexOf(&apos;ok&apos;) &gt; 0) &#123;</span><br><span class="line">            payCallback(true);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            payCallback(false);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export &#123; Pay as default &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="百度地图"><a href="#百度地图" class="headerlink" title="百度地图"></a>百度地图</h2><p><strong>React-Bmap API</strong><br><a href="https://huiyan-fe.github.io/react-bmap/examples/" target="_blank" rel="noopener">https://huiyan-fe.github.io/react-bmap/examples/</a></p>
+<blockquote>
+<p>React-BMap只是利用了React组件的生命周期，来调用对应的百度地图JavaScript Api的方法，比如在componentDidMount和componentDidUpdate的时候在地图上添加覆盖物，componentWillUnmount的时候移除覆盖物，React对应的render渲染函数模块返回的是null。所以这里面地图相关的dom并不是react渲染的，真正创建地图之类的还是使用百度地图JavaScript Api，React-BMap只是利用了React组件的写法来封装百度地图JavaScript Api，使我们在使用React的时候能更方便的使用百度地图JavaScript Api。</p>
+</blockquote>
+<h3 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h3><p><strong>申请百度地图账号</strong><br>首先去百度地图开放平台官网注册成为开发者.</p>
+<p><a href="http://lbsyun.baidu.com/" target="_blank" rel="noopener">http://lbsyun.baidu.com/</a></p>
+<p>创建应用，获取移动账户秘钥。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><pre><code>npm install react-bmap
+</code></pre><h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p><strong>首页引入api</strong></p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=你的秘钥&quot;&gt;&lt;/script&gt;
+</code></pre><p><strong>引入组件</strong></p>
+<pre><code>import { Map, Marker, Polyline, PointLabel, NavigationControl, MarkerList } from &apos;react-bmap&apos;;
+</code></pre><p><strong>具体实现实例</strong><br>基本地图标记</p>
+<pre><code>&lt;Map center={center} zoom=&quot;13&quot;&gt;
+ {
+    mapdata.map((item, index) =&gt; {
+      if (isFlag==0) {//
+        return (
+          &lt;Marker key={index}  position={{lng: item.longitude,lat: item.latitude}} &gt;
+            &lt;img style={{height:'3rem',width:'3rem'}} src={require(&apos;./images/air.png&apos;)} /&gt;
+            &lt;div style={{fontSize:'0.8rem',color:'red',fontWeight: 'bold', width:'30rem'}}&gt;{item.num} &lt;/div&gt;  
+          &lt;/Marker&gt;
+        )  
+      }
+    }) 
+  } 
+  &lt;NavigationControl /&gt;
+&lt;/Map&gt; 
+</code></pre><p><strong>二、其他实例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;Map center=&#123;center&#125; zoom=&quot;17&quot; style=&#123;&#123;height: &apos;44rem&apos;&#125;&#125;&gt;         </span><br><span class="line"> &#123;/*&lt;PointLabel data=&#123;points&#125; /&gt;*/&#125; </span><br><span class="line">  &#123;/*&lt;MarkerList data=&#123; points &#125;  /&gt; */&#125; // 绘制标记点</span><br><span class="line">  </span><br><span class="line">  &#123;</span><br><span class="line">    markers.map((marker, index) =&gt; &#123;</span><br><span class="line">       return (</span><br><span class="line">          &lt;Marker position=&#123;&#123;lng: marker.lng, lat: marker.lat&#125;&#125; offset=&#123;new window.BMap.Size(-15, -20)&#125;&gt;</span><br><span class="line">            &lt;img src=&#123;require(&apos;./images/start_pos.png&apos;)&#125; onClick=&#123;(event) =&gt; this.handleClick(marker, event)&#125;/&gt;  </span><br><span class="line">            &lt;div id=&#123;&apos;marker&apos;+marker.porder&#125; style=&#123;&#123;fontSize:&apos;0.8rem&apos;,color:&apos;red&apos;, display:&apos;none&apos;&#125;&#125;&gt;&#123;marker.name&#125; &lt;/div&gt;            </span><br><span class="line">          &lt;/Marker&gt;  </span><br><span class="line">        )</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;Polyline strokeColor=&apos;blue&apos; path=&#123; markers&#125; /&gt; //绘制线路</span><br><span class="line">  &lt;NavigationControl anchor=&quot;BMAP_ANCHOR_TOP_RIGHT&quot;/&gt; </span><br><span class="line">&lt;/Map&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="二维码组件"><a href="#二维码组件" class="headerlink" title="二维码组件"></a>二维码组件</h2><p><strong>API</strong><br><a href="https://www.npmjs.com/package/qrcode-react" target="_blank" rel="noopener">https://www.npmjs.com/package/qrcode-react</a></p>
+<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><pre><code>npm install qrcode-react
+</code></pre><h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><p><strong>引入组件</strong></p>
+<pre><code>import QRCode from &apos;qrcode-react&apos;;
+</code></pre><p><strong>具体使用</strong></p>
+<pre><code>&lt;Dialog type=&quot;ios&quot; show={this.state.showQR} buttons={this.state.passStyle.buttons} &gt;
+  &lt;QRCode size={236} value={ qrstr } /&gt;
+&lt;/Dialog&gt;
+</code></pre><p>可以设置logo，背景色，大小等。<br><img src="https://img-blog.csdnimg.cn/20190122102047726.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpbmdmdXpoaWppYW54aWE=,size_16,color_FFFFFF,t_70" alt="qrcode可设置属性"></p>
+<h2 id="react-s-alert组件"><a href="#react-s-alert组件" class="headerlink" title="react-s-alert组件"></a>react-s-alert组件</h2><h3 id="安装-3"><a href="#安装-3" class="headerlink" title="安装"></a>安装</h3><pre><code>npm install react-s-alert --save
+</code></pre><h3 id="使用-3"><a href="#使用-3" class="headerlink" title="使用"></a>使用</h3><p><strong>在APP中引入样式与库文件</strong></p>
+<pre><code>import Alert from &apos;react-s-alert&apos;;
+require(&apos;react-s-alert/dist/s-alert-default.css&apos;);
+require(&apos;react-s-alert/dist/s-alert-css-effects/genie.css&apos;);
+</code></pre><p><strong>具体使用</strong></p>
+<pre><code>import Alert from &apos;react-s-alert&apos;;
+</code></pre><p><strong>警告提示</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Alert.warning(&apos;请选择&apos;, &#123;position: &apos;top&apos;,</span><br><span class="line">            offset: 40,onRouteClose: false, timeout: 1500&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>错误提示</strong></p>
+<pre><code>Alert.error(json.head.msg, 
+    {position: &apos;top&apos;, offset: 40,onRouteClose: false, timeout: 2000,
+    onClose: function () {
+       Utility.toPage(&apos;order&apos;);
+    }
+});
+</code></pre><p>  onClose事件处理提示完之后的操作。</p>
+<h2 id="react-confirm-alert"><a href="#react-confirm-alert" class="headerlink" title="react-confirm-alert"></a>react-confirm-alert</h2><h3 id="安装-4"><a href="#安装-4" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-confirm-alert --save</span><br></pre></td></tr></table></figure>
+<h3 id="使用-4"><a href="#使用-4" class="headerlink" title="使用"></a>使用</h3><p>引入相关样式与组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import &#123; confirmAlert &#125; from &apos;react-confirm-alert&apos;; // Import</span><br><span class="line">import &apos;react-confirm-alert/src/react-confirm-alert.css&apos; // Import css</span><br></pre></td></tr></table></figure></p>
+<p>以退票提示为例，在退票操作之前，询问用户是否确认退票(或者常见的删除前确认提示)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">confirmAlert(&#123;</span><br><span class="line">  title: &apos;操作提示&apos;,</span><br><span class="line">   message: &apos;退票将产生[&apos;+fee+&apos;]元手续费，您确认执行退款操作吗?&apos;,</span><br><span class="line">   buttons: [</span><br><span class="line">     &#123;</span><br><span class="line">       label: &apos;确认&apos;,</span><br><span class="line">       onClick: () =&gt; this.refund() // 执行退票功能</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       label: &apos;取消&apos;,</span><br><span class="line">       onClick: () =&gt; console.log(&apos;取消了操作...&apos;)</span><br><span class="line">     &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>关于提示的样式可以根据API来设置或者到源码里改改界面颜色。<br><strong>API</strong><br><a href="https://www.npmjs.com/package/react-confirm-alert" target="_blank" rel="noopener">https://www.npmjs.com/package/react-confirm-alert</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>做完这一个项目，对react以及相关组件了解了个大概，但现在看代码还是很杂很乱，看着闹心。<br>为了赶进度，一些react特性没有好好地应用，还是原始的JavaScript方式。<br>这次基本总结的同时也开始进行了项目重构，希望可以发挥react的优势，优化代码，优化调用以及实现方式等，争取年前完成。</p>
+<blockquote>
+<p>文献资料<br>从零搭建React全家桶框架教程<br><a href="https://github.com/brickspert/react-family" target="_blank" rel="noopener">https://github.com/brickspert/react-family</a><br><a href="https://react.docschina.org/docs/thinking-in-react.html" target="_blank" rel="noopener">https://react.docschina.org/docs/thinking-in-react.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/21/redux/" rel="next" title="Redux">
+                <i class="fa fa-chevron-left"></i> Redux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/Springboot接口版本管理/" rel="prev" title="Springboot接口版本管理">
+                Springboot接口版本管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/anf.jpg" alt="ebonyzhang">
+            
+              <p class="site-author-name" itemprop="name">ebonyzhang</p>
+              <p class="site-description motion-element" itemprop="description">Life is a journey, the most brilliant thing is the process!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+			
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/ebonyzhang@qq.com" title="E-Mail &rarr; ebonyzhang@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发工具选择"><span class="nav-number">1.</span> <span class="nav-text">开发工具选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发工具"><span class="nav-number">1.1.</span> <span class="nav-text">开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sublime-Text-3"><span class="nav-number">1.1.1.</span> <span class="nav-text">Sublime Text 3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vscode"><span class="nav-number">1.1.2.</span> <span class="nav-text">Vscode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Atom"><span class="nav-number">1.1.3.</span> <span class="nav-text">Atom</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试工具"><span class="nav-number">1.2.</span> <span class="nav-text">调试工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React全家桶"><span class="nav-number">2.</span> <span class="nav-text">React全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建开发环境demo"><span class="nav-number">2.1.</span> <span class="nav-text">构建开发环境demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react"><span class="nav-number">2.2.</span> <span class="nav-text">react</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟dom"><span class="nav-number">2.2.1.</span> <span class="nav-text">虚拟dom</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSX"><span class="nav-number">2.2.2.</span> <span class="nav-text">JSX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组件"><span class="nav-number">2.2.3.</span> <span class="nav-text">组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux"><span class="nav-number">2.3.</span> <span class="nav-text">redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router"><span class="nav-number">2.4.</span> <span class="nav-text">react-router</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.4.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">2.4.2.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-sass"><span class="nav-number">2.5.</span> <span class="nav-text">less/sass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6"><span class="nav-number">2.6.</span> <span class="nav-text">ES6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ESLint"><span class="nav-number">2.7.</span> <span class="nav-text">ESLint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack"><span class="nav-number">2.8.</span> <span class="nav-text">webpack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-UI库"><span class="nav-number">3.</span> <span class="nav-text">react UI库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Material-UI"><span class="nav-number">3.1.</span> <span class="nav-text">Material-UI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ant-design"><span class="nav-number">3.2.</span> <span class="nav-text">Ant-design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-weui"><span class="nav-number">3.3.</span> <span class="nav-text">react-weui</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支付宝支付"><span class="nav-number">4.</span> <span class="nav-text">支付宝支付</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微信支付"><span class="nav-number">5.</span> <span class="nav-text">微信支付</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#百度地图"><span class="nav-number">6.</span> <span class="nav-text">百度地图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本设置"><span class="nav-number">6.1.</span> <span class="nav-text">基本设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">6.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-1"><span class="nav-number">6.3.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维码组件"><span class="nav-number">7.</span> <span class="nav-text">二维码组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-2"><span class="nav-number">7.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-2"><span class="nav-number">7.2.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-s-alert组件"><span class="nav-number">8.</span> <span class="nav-text">react-s-alert组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-3"><span class="nav-number">8.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-3"><span class="nav-number">8.2.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-confirm-alert"><span class="nav-number">9.</span> <span class="nav-text">react-confirm-alert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-4"><span class="nav-number">9.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-4"><span class="nav-number">9.2.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">10.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+		
+    </div>
+	
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">³ICP��19006088��-1 </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ebonyzhang</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">72k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:06</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.6.0</div>
+
+
+
+	<div>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+		<span class="post-meta-divider">|</span>
+		<span id="busuanzi_container_site_uv">访客数量<span id="busuanzi_value_site_uv"></span>人</span>
+	</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+	
+	   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+	   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+	   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+	
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+    
+  <script type="text/javascript" count="99" zindex="-2" opacity="1" color="255 0 0" src="/js/src/particle.js"></script>
+</body>
+</html>
