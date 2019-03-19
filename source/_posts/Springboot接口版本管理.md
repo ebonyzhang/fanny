@@ -10,7 +10,7 @@ date: 2019-02-18
 
 ## 版本控制
 自定义ApiVersion注解，以实现随机获取路径的版本号。
-```
+```java
 import java.lang.annotation.*;
 
 //版本控制
@@ -25,7 +25,7 @@ public @interface ApiVersion {
 
 ## ApiVersionCondition 
 自定义实现了RequestCondition接口，通过正则表达式获得需要匹配的版本号。
-```
+```java
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,7 +73,7 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
 
 ## 自定义CustomRequestMappingHandlerMapping 
 自定义CustomRequestMappingHandlerMapping ，继承RequestMappingHandlerMapping，获得注解标注的接口路径，然后返回自定义的实现类。
-```
+```java
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -104,7 +104,7 @@ public class CustomRequestMappingHandlerMapping extends RequestMappingHandlerMap
 ## WebMvcRegistrations
 WebMvcRegistrations接口下提供了WebMvcRegistrationsAdapter转换器，它可以指定自定义的RequestMappingHandlerMapping。
 
-```
+```java
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -120,7 +120,7 @@ public class WebMvcRegistrationsConfig implements WebMvcRegistrations {
 
 ## 版本测试类HelloController
 
-```
+```java
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

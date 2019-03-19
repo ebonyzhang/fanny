@@ -1,7 +1,7 @@
 ﻿---
 title: Spingboot ActiveMQ订阅发布模式
-tag: Spingboot 
-category: Spingboot
+tag: Springboot 
+category: Springboot
 date: 2019-02-27
 ---
 
@@ -19,7 +19,8 @@ Queue：点对点，可以有多个消费者但是消息不能重复被消费。
 
 ## 配置
 ### pom.xml中添加依赖
-```
+
+```java
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-activemq</artifactId>
@@ -29,7 +30,7 @@ Queue：点对点，可以有多个消费者但是消息不能重复被消费。
 ### 创建ActiveMQ启动配置类
 项目中需要的是多个topic消息队列的监听
 
-```
+```java
 import javax.jms.Topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -84,7 +85,8 @@ public class ActiveMQ4Config {
 ## 实现消息消费者
 @JmsListener注解标识监听哪一个消息队列。
 1. 人员进出门记录监听以及同步
-```
+
+```java
 import javax.jms.BytesMessage;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -119,9 +121,9 @@ public class Consumer {
                 // 输出扩展字段
                 logger.info("extInfo "+extInfo.toStringUtf8());
                 AcsEvent.AccessEventLog aa = AcsEvent.AccessEventLog.parseFrom(extInfo);
-                 if(aa.getEventCode()==83912960) {//人证比对通过
-                	logger.info("83912960 订阅事件 [人证比对]通过");
-                	 syncRecord(aa);//同步记录
+                if(aa.getEventCode()==Constant.COMMON_FACE) {//人证比对通过
+                	logger.info("83912960[人证比对]订阅事件通过");
+                	//人员同步业务处理...
 				}    
             }
 		} catch (Exception e) {	
@@ -131,7 +133,8 @@ public class Consumer {
 	
 ```
 2. 车辆进出门记录监听以及同步
-```
+
+```java
 
 import javax.jms.BytesMessage;
 import javax.jms.JMSException;
@@ -162,17 +165,16 @@ public class ConsumerPms {
                 bytesMessage.readBytes(bt);
                 // 壳文件字段，EventDis类为event_dis.proto文件解析而来，CommEventLog类为事件壳文件类
                 EventDis.CommEventLog parseFrom = EventDis.CommEventLog.parseFrom(bt);
-                // 输出壳文件字段
                 // 扩展字段，此字段为设备上报事件内容，部分事件需要使用pb文件再次解析
                 ByteString extInfo = parseFrom.getExtInfo();
                 // 输出扩展字段
                 logger.info("extInfo "+extInfo.toStringUtf8());
                 PmsEvent.MsgPmsEvent aa = PmsEvent.MsgPmsEvent.parseFrom(extInfo);
                 if(parseFrom.getEventType()==Constant.COMMON_CAR_ENTER) {//车辆停入
-                	syncCarRecord(aa.getPmsEvent(), 1);
+                	//车辆驶入记录同步业务处理...
                 }
                 if(parseFrom.getEventType()==Constant.COMMON_CAR_OUT) {//车辆驶离
-                	syncCarRecord(aa.getPmsEvent(), 2);
+                	//车辆驶离记录同步业务处理...
                 }
             }
 		} catch (Exception e) {	

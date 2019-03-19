@@ -91,7 +91,7 @@ footer:
   # http://www.miitbeian.gov.cn
   beian:
     enable: true
-    icp: Â³ICP±¸19006088ºÅ-1
+    icp: é²ICPå¤‡19006088å·-1
     
   counter: true
 
@@ -697,22 +697,22 @@ firestore:
 
 # Show Views/Visitors of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
-# Ôö¼Ó²»Ëã×Ó·ÃÎÊÊıÁ¿Í³¼Æ
+# å¢åŠ ä¸ç®—å­è®¿é—®æ•°é‡ç»Ÿè®¡
 busuanzi_count:
   # count values only if the other configs are false
   enable: false
   # custom uv span for the whole site
   site_uv: false
-  site_uv_header: <i class="fa fa-user"></i> ·ÃÎÊÈËÊı
+  site_uv_header: <i class="fa fa-user"></i> è®¿é—®äººæ•°
   site_uv_footer:
   # custom pv span for the whole site
   site_pv: false
-  site_pv_header: <i class="fa fa-eye"></i> ·ÃÎÊ×ÜÁ¿
-  site_pv_footer: ´Î
+  site_pv_header: <i class="fa fa-eye"></i> è®¿é—®æ€»é‡
+  site_pv_footer: æ¬¡
   # custom pv span for one page only
   page_pv: false
-  page_pv_header: <i class="fa fa-file-o"></i> ä¯ÀÀ
-  page_pv_footer: ´Î
+  page_pv_header: <i class="fa fa-file-o"></i> æµè§ˆ
+  page_pv_footer: æ¬¡
   
 
 # Tencent analytics ID
@@ -868,7 +868,7 @@ pace_theme: pace-theme-minimal
 # Canvas-nest
 # Dependencies: https://github.com/theme-next/theme-next-canvas-nest
 canvas_nest:
-  enable: false
+  enable: true
   onmobile: false # display on mobile or not
   color: '0,0,255' # RGB values, use ',' to separate
   opacity: 0.5 # the opacity of line: 0~1
@@ -1056,6 +1056,6 @@ images: images
 
 fireworks: true
 
-# ÎÄÕÂÄ©Î²Ìí¼Ó¡°±¾ÎÄ½áÊø¡±±ê¼Ç
+# æ–‡ç« æœ«å°¾æ·»åŠ â€œæœ¬æ–‡ç»“æŸâ€æ ‡è®°
 passage_end_tag:
   enabled: true
